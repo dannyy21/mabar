@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () => Get.toNamed(RouteName.page_2));
+    Timer(Duration(seconds: 3), () => Get.toNamed(RouteName.page_3));
   }
 
   @override
