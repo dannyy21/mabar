@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 40,
                           child: ClipOval(
                               child: Image.asset(
-                            'assets/images/fahri.jpg',
+                            'assets/images/Photo.png',
                             fit: BoxFit.cover,
                           ))),
                       Padding(

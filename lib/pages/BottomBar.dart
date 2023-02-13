@@ -121,6 +121,7 @@ class _BottomBarState extends State<BottomBar> {
       body: _children[_selectedIndex],
       bottomNavigationBar: BottomAppBar(
         child: Container(
+          color: Color(0xFFFA5075),
           height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

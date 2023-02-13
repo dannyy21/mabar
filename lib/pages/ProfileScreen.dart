@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:tugas/pages/HistoryScreen.dart';
+import 'package:tugas/pages/LoginScreen.dart';
 import 'package:tugas/pages/MyProfileScreen.dart';
 import 'package:tugas/pages/SearchPlayer.dart';
 import 'package:tugas/pages/TeamScreen.dart';
@@ -96,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           Container(
-            height: 500,
+            height: 400,
             width: 200,
             child: ListView(
               children: [
@@ -166,6 +167,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                 ),
               ],
+            ),
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (BuildContext context) => LoginScreen()));
+              },
+              child: Text(
+                "Logout",
+                style: TextStyle(
+                  color: Color(0xFFFA5075),
+                ),
+              ),
             ),
           )
         ]),

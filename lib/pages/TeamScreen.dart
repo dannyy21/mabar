@@ -148,7 +148,8 @@ class _TeamScreenState extends State<TeamScreen> {
                     //   return CircularProgressIndicator();
                     // }
                     // List<DocumentSnapshot> players = snapshot.data!.docs;
-                    Expanded(
+                    Container(
+                      height: 200,
                       child: FutureBuilder<QuerySnapshot>(
                         future: FirebaseFirestore.instance
                             .collection("players")
@@ -222,47 +223,95 @@ class _TeamScreenState extends State<TeamScreen> {
                                                                     child:
                                                                         Column(
                                                                       children: [
-                                                                        Stack(
-                                                                          children: [
-                                                                            Image.asset(
-                                                                              'assets/images/Photo.png',
-                                                                              width: 40,
-                                                                              height: 40,
-                                                                              fit: BoxFit.fill,
-                                                                            ),
-                                                                            Container(
-                                                                              width: 40,
-                                                                              height: 15,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                                                                                gradient: LinearGradient(
-                                                                                  begin: Alignment.topLeft,
-                                                                                  end: Alignment.bottomRight,
-                                                                                  colors: [
-                                                                                    Color(0xFFFF6480),
-                                                                                    Color(0xFFF22E63),
-                                                                                  ],
+                                                                        Container(
+                                                                          width:
+                                                                              50,
+                                                                          child:
+                                                                              Stack(
+                                                                            children: [
+                                                                              Padding(
+                                                                                padding: const EdgeInsets.only(top: 10, left: 15),
+                                                                                child: Container(
+                                                                                    height: 35,
+                                                                                    width: 35,
+                                                                                    child: ClipOval(
+                                                                                        child: Image.asset(
+                                                                                      'assets/images/Photo.png',
+                                                                                      // fit: BoxFit.cover,
+                                                                                    ))),
+                                                                              ),
+                                                                              Positioned(
+                                                                                top: 5,
+                                                                                left: 0,
+                                                                                child: Container(
+                                                                                  child: Text(
+                                                                                    data['role'],
+                                                                                    style: TextStyle(color: Colors.white, fontSize: 10),
+                                                                                  ),
+                                                                                  width: 35,
+                                                                                  height: 15,
+                                                                                  decoration: BoxDecoration(
+                                                                                    gradient: LinearGradient(
+                                                                                      begin: Alignment.topLeft,
+                                                                                      end: Alignment.bottomRight,
+                                                                                      colors: [
+                                                                                        Color(0xFFFF6480),
+                                                                                        Color(0xFFF22E63),
+                                                                                      ],
+                                                                                    ),
+                                                                                    shape: BoxShape.rectangle,
+                                                                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                  ),
                                                                                 ),
-                                                                                color: Colors.white,
-                                                                                // border: Border.all(color: Colors.red),
                                                                               ),
-                                                                              child: Text(
-                                                                                data['role'],
-                                                                                style: TextStyle(color: Colors.white, fontSize: 10),
-                                                                              ),
-                                                                              alignment: Alignment.topLeft,
-                                                                              // foregroundDecoration: BoxDecoration(
-                                                                              //   border: Border.all(color: Colors.red),
-                                                                              // ),
-                                                                            ),
-                                                                          ],
+                                                                            ],
+                                                                          ),
                                                                         ),
-                                                                        Text(
-                                                                          data[
-                                                                              "username"],
-                                                                          style: TextStyle(
-                                                                              color: Colors.white,
-                                                                              fontSize: 10),
+                                                                        // Stack(
+                                                                        //   children: [
+                                                                        //     Image.asset(
+                                                                        //       'assets/images/Photo.png',
+                                                                        //       width: 40,
+                                                                        //       height: 40,
+                                                                        //       fit: BoxFit.fill,
+                                                                        //     ),
+                                                                        //     Container(
+                                                                        //       width: 40,
+                                                                        //       height: 15,
+                                                                        //       decoration: BoxDecoration(
+                                                                        //         borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                        //         gradient: LinearGradient(
+                                                                        //           begin: Alignment.topLeft,
+                                                                        //           end: Alignment.bottomRight,
+                                                                        //           colors: [
+                                                                        //             Color(0xFFFF6480),
+                                                                        //             Color(0xFFF22E63),
+                                                                        //           ],
+                                                                        //         ),
+                                                                        //         color: Colors.white,
+                                                                        //         // border: Border.all(color: Colors.red),
+                                                                        //       ),
+                                                                        //       child: Text(
+                                                                        //         data['role'],
+                                                                        //         style: TextStyle(color: Colors.white, fontSize: 10),
+                                                                        //       ),
+                                                                        //       alignment: Alignment.topLeft,
+                                                                        //       // foregroundDecoration: BoxDecoration(
+                                                                        //       //   border: Border.all(color: Colors.red),
+                                                                        //       // ),
+                                                                        //     ),
+                                                                        //   ],
+                                                                        // ),
+
+                                                                        Padding(
+                                                                          padding:
+                                                                              const EdgeInsets.only(left: 10),
+                                                                          child:
+                                                                              Text(
+                                                                            data["username"],
+                                                                            style:
+                                                                                TextStyle(color: Colors.white, fontSize: 10),
+                                                                          ),
                                                                         )
                                                                       ],
                                                                     ),
@@ -577,6 +626,7 @@ class _TeamScreenState extends State<TeamScreen> {
                                 height: 80,
                                 width: 170,
                                 decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
                                     color: Color(0xFFFA5075),
                                     width: 3.0,
@@ -584,23 +634,64 @@ class _TeamScreenState extends State<TeamScreen> {
                                 ),
                                 child: Row(
                                   children: [
-                                    Column(
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/Photo.png',
-                                          width: 55,
-                                          height: 55,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/Photo.png',
+                                            width: 55,
+                                            height: 55,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    Column(
-                                      children: [
-                                        Text("KillMe"),
-                                        Text("KillMe"),
-                                        Text("KillMe"),
-                                        Text("KillMe")
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "KillMe",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 10),
+                                          ),
+                                          Text(
+                                            "Gold Player",
+                                            style: TextStyle(
+                                                color: Color(0xFFF4C73E),
+                                                fontSize: 10),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Status :",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 10),
+                                              ),
+                                              Text(
+                                                "Online",
+                                                style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontSize: 10),
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            "Category's : MOBA",
+                                            style: TextStyle(
+                                                color: Color(0xFFFA5075),
+                                                fontSize: 10),
+                                          )
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
@@ -613,6 +704,7 @@ class _TeamScreenState extends State<TeamScreen> {
                                 height: 80,
                                 width: 170,
                                 decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
                                     color: Color(0xFFFA5075),
                                     width: 3.0,
@@ -620,23 +712,64 @@ class _TeamScreenState extends State<TeamScreen> {
                                 ),
                                 child: Row(
                                   children: [
-                                    Column(
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/Photo.png',
-                                          width: 55,
-                                          height: 55,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/Photo.png',
+                                            width: 55,
+                                            height: 55,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    Column(
-                                      children: [
-                                        Text("KillMe"),
-                                        Text("KillMe"),
-                                        Text("KillMe"),
-                                        Text("KillMe")
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Lase",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 10),
+                                          ),
+                                          Text(
+                                            "Silver Player",
+                                            style: TextStyle(
+                                                color: Color(0xFFFB7B7B7),
+                                                fontSize: 10),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Status :",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 10),
+                                              ),
+                                              Text(
+                                                "Away",
+                                                style: TextStyle(
+                                                    color: Color(0xFFFFA8F2C),
+                                                    fontSize: 10),
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            "Category's : MOBA",
+                                            style: TextStyle(
+                                                color: Color(0xFFFA5075),
+                                                fontSize: 10),
+                                          )
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),

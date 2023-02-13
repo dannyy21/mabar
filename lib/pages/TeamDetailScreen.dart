@@ -124,46 +124,93 @@ class _TeamDetailScreenState extends State<TeamDetailScreen> {
                                     const EdgeInsets.only(left: 20, top: 20),
                                 child: Column(
                                   children: [
+                                    // Stack(
+                                    //   children: [
+                                    //     Image.asset(
+                                    //       'assets/images/Photo.png',
+                                    //       width: 40,
+                                    //       height: 40,
+                                    //       fit: BoxFit.fill,
+                                    //     ),
+                                    //     Container(
+                                    //       // width: double.infinity,
+                                    //       // height: double.infinity,
+                                    //       decoration: BoxDecoration(
+                                    //         borderRadius: BorderRadius.all(
+                                    //             Radius.circular(10)),
+                                    //         gradient: LinearGradient(
+                                    //           begin: Alignment.topLeft,
+                                    //           end: Alignment.bottomRight,
+                                    //           colors: [
+                                    //             Color(0xFFFF6480),
+                                    //             Color(0xFFF22E63),
+                                    //           ],
+                                    //         ),
+                                    //         color: Colors.white,
+                                    //         // border: Border.all(color: Colors.red),
+                                    //       ),
+                                    //       child: Text(
+                                    //         widget.role,
+                                    //         style:
+                                    //             TextStyle(color: Colors.white),
+                                    //       ),
+                                    //       alignment: Alignment.topLeft,
+                                    //       // foregroundDecoration: BoxDecoration(
+                                    //       //   border: Border.all(color: Colors.red),
+                                    //       // ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+
                                     Stack(
                                       children: [
-                                        Image.asset(
-                                          'assets/images/Photo.png',
-                                          width: 40,
-                                          height: 40,
-                                          fit: BoxFit.fill,
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10, left: 15),
+                                          child: Container(
+                                              height: 35,
+                                              width: 35,
+                                              child: ClipOval(
+                                                  child: Image.asset(
+                                                'assets/images/Photo.png',
+                                                // fit: BoxFit.cover,
+                                              ))),
                                         ),
-                                        Container(
-                                          // width: double.infinity,
-                                          // height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            gradient: LinearGradient(
-                                              begin: Alignment.topLeft,
-                                              end: Alignment.bottomRight,
-                                              colors: [
-                                                Color(0xFFFF6480),
-                                                Color(0xFFF22E63),
-                                              ],
+                                        Positioned(
+                                          top: 5,
+                                          left: 0,
+                                          child: Container(
+                                            child: Text(
+                                              widget.role,
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             ),
-                                            color: Colors.white,
-                                            // border: Border.all(color: Colors.red),
+                                            width: 35,
+                                            height: 15,
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                                colors: [
+                                                  Color(0xFFFF6480),
+                                                  Color(0xFFF22E63),
+                                                ],
+                                              ),
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                            ),
                                           ),
-                                          child: Text(
-                                            widget.role,
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          alignment: Alignment.topLeft,
-                                          // foregroundDecoration: BoxDecoration(
-                                          //   border: Border.all(color: Colors.red),
-                                          // ),
                                         ),
                                       ],
                                     ),
-                                    Text(
-                                      widget.username,
-                                      style: TextStyle(color: Colors.white),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        widget.username,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     )
                                   ],
                                 ),
