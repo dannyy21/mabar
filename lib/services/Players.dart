@@ -17,10 +17,11 @@ class PlayerManagement {
       String _description,
       String myUsername) async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
-
+    String documentId =
+        FirebaseFirestore.instance.collection('players').doc().id;
     FirebaseFirestore.instance
         .collection('players')
-        .doc(firebaseUser?.uid)
+        .doc(documentId)
         .set({
           'gamename': _gamename,
           'category': _category,

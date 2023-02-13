@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -10,6 +12,7 @@ class MyProfileScreen extends StatefulWidget {
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
+  String? myUsername;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,13 +92,28 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          "FahryFar",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700),
+                        child: FutureBuilder(
+                          future: _fetch(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState !=
+                                ConnectionState.done)
+                              return Text("Loading data...Please wait");
+                            return Text(
+                              myUsername!,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700),
+                            );
+                          },
                         ),
+                        // Text(
+                        //   "FahryFar",
+                        //   style: TextStyle(
+                        //       color: Colors.white,
+                        //       fontSize: 15,
+                        //       fontWeight: FontWeight.w700),
+                        // ),
                       ),
                       Text(
                         "Online",
@@ -293,5 +311,21 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         ),
       ),
     );
+  }
+
+  _fetch() async {
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null)
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          .then((ds) {
+        myUsername = ds.data()!['username'] ?? '';
+
+        // print(myEmail);
+      }).catchError((e) {
+        print(e);
+      });
   }
 }

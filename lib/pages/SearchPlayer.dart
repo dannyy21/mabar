@@ -63,50 +63,184 @@ class _SearchPlayerState extends State<SearchPlayer> {
       body: Container(
         padding: EdgeInsets.only(top: 20),
         color: Color(0xff2A0D2E),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 4, bottom: 20),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Color(0xFFFA5075),
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                  )
-                ],
+        child: ListView(children: <Widget>[
+          (Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 4, bottom: 20),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Color(0xFFFA5075),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  Text(
-                    'Cari Teman Bermain',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFFFA5075),
-                    ),
-                  )
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  children: [
+                    Text(
+                      'Cari Teman Bermain',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFFFA5075),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Form(
-              key: _formKey,
-              child: Padding(
+              Form(
+                key: _formKey,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Nama Game",
+                          labelStyle: TextStyle(color: Colors.white),
+                        ),
+                        style: TextStyle(color: Colors.white),
+                        controller: _gamename,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      // RaisedButton(
+                      //   onPressed: _submit,
+                      //   child: Text('Submit'),
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(
+                    hintText: "Select an option",
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                  ),
+                  value: _selectedCategory,
+                  items: [
+                    DropdownMenuItem(
+                      child: Text("MOBA"),
+                      value: "MOBA",
+                    ),
+                    DropdownMenuItem(
+                      child: Text("FPS"),
+                      value: "2",
+                    ),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedCategory = value;
+                      _category.text = value.toString();
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(
+                    hintText: "Select an option",
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                  ),
+                  value: _selectedLocation,
+                  items: [
+                    DropdownMenuItem(
+                      child: Text("Bandung"),
+                      value: "Bandung",
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Cimahi"),
+                      value: "Cimahi",
+                    ),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedLocation = value;
+                      _location.text = value.toString();
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  children: [
+                    Text(
+                      "Role",
+                      style: TextStyle(
+                        color: Color(0xFFFA5075),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: Row(
+                  children: [
+                    DropdownButton<String>(
+                      value: _selectedRole,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text(
+                            "Marksman",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          value: "Marksman",
+                        ),
+                        DropdownMenuItem(
+                          child: Text(
+                            "Fighter",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          value: "Fighter",
+                        ),
+                        DropdownMenuItem(
+                          child: Text(
+                            "Assassin",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          value: "Assassin",
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedRole = value;
+                          _role.text = value.toString();
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 child: Column(
                   children: [
                     TextFormField(
+                      style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        labelText: "Nama Game",
+                        labelText: "Number of Players",
                         labelStyle: TextStyle(color: Colors.white),
                       ),
-                      style: TextStyle(color: Colors.white),
-                      controller: _gamename,
+                      controller: _numberplayer,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -121,194 +255,63 @@ class _SearchPlayerState extends State<SearchPlayer> {
                   ],
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  hintText: "Select an option",
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                ),
-                value: _selectedCategory,
-                items: [
-                  DropdownMenuItem(
-                    child: Text("MOBA"),
-                    value: "MOBA",
-                  ),
-                  DropdownMenuItem(
-                    child: Text("FPS"),
-                    value: "2",
-                  ),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    _selectedCategory = value;
-                    _category.text = value.toString();
-                  });
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  hintText: "Select an option",
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                ),
-                value: _selectedLocation,
-                items: [
-                  DropdownMenuItem(
-                    child: Text("Bandung"),
-                    value: "Bandung",
-                  ),
-                  DropdownMenuItem(
-                    child: Text("Cimahi"),
-                    value: "Cimahi",
-                  ),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    _selectedLocation = value;
-                    _location.text = value.toString();
-                  });
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  Text(
-                    "Role",
-                    style: TextStyle(
-                      color: Color(0xFFFA5075),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              child: Row(
-                children: [
-                  DropdownButton<String>(
-                    value: _selectedRole,
-                    items: [
-                      DropdownMenuItem(
-                        child: Text(
-                          "Marksman",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        value: "Marksman",
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        labelText: "Description",
+                        labelStyle: TextStyle(color: Colors.white),
                       ),
-                      DropdownMenuItem(
-                        child: Text(
-                          "Fighter",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        value: "Fighter",
-                      ),
-                      DropdownMenuItem(
-                        child: Text(
-                          "Assassin",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        value: "Assassin",
-                      ),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedRole = value;
-                        _role.text = value.toString();
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              child: Column(
-                children: [
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      labelText: "Number of Players",
-                      labelStyle: TextStyle(color: Colors.white),
+                      controller: _description,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
                     ),
-                    controller: _numberplayer,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                  ),
-                  // RaisedButton(
-                  //   onPressed: _submit,
-                  //   child: Text('Submit'),
-                  // ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              child: Column(
-                children: [
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      labelText: "Description",
-                      labelStyle: TextStyle(color: Colors.white),
-                    ),
-                    controller: _description,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                  ),
-                  // RaisedButton(
-                  //   onPressed: _submit,
-                  //   child: Text('Submit'),
-                  // ),
-                ],
-              ),
-            ),
-            // Container(
-            //   height: 65,
-            //   padding: EdgeInsets.only(right: 70, left: 70),
-            //   child: ElevatedButton(
-            //       style: raisedButtonStyle,
-            //       child: Text(
-            //         "Let's Combat!",
-            //         style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
-            //       ),
-            //       onPressed: () {}),
-            // ),
-            Container(
-              height: 75,
-              width: 350,
-              padding: EdgeInsets.only(right: 70, left: 70, top: 20),
-              child: ElevatedButton(
-                style: raisedButtonStyle,
-                onPressed:
-                    // () => {
-                    // Navigator.of(context).pushReplacement(
-                    //     MaterialPageRoute(builder: (context) => (Publish())))
-                    _submit,
-                // },
-                child: Text(
-                  'Publish',
-                  style: TextStyle(fontWeight: FontWeight.w700),
+                    // RaisedButton(
+                    //   onPressed: _submit,
+                    //   child: Text('Submit'),
+                    // ),
+                  ],
                 ),
               ),
-            ),
-          ],
-        ),
+              // Container(
+              //   height: 65,
+              //   padding: EdgeInsets.only(right: 70, left: 70),
+              //   child: ElevatedButton(
+              //       style: raisedButtonStyle,
+              //       child: Text(
+              //         "Let's Combat!",
+              //         style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+              //       ),
+              //       onPressed: () {}),
+              // ),
+              Container(
+                height: 75,
+                width: 350,
+                padding: EdgeInsets.only(right: 70, left: 70, top: 20),
+                child: ElevatedButton(
+                  style: raisedButtonStyle,
+                  onPressed:
+                      // () => {
+                      // Navigator.of(context).pushReplacement(
+                      //     MaterialPageRoute(builder: (context) => (Publish())))
+                      _submit,
+                  // },
+                  child: Text(
+                    'Publish',
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ),
+            ],
+          )),
+        ]),
       ),
     );
   }
